@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SurveyMSA.iml" filepath="$PROJECT_DIR$/.idea/SurveyMSA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo1.main.iml" filepath="$PROJECT_DIR$/.idea/modules/demo1.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo2.main.iml" filepath="$PROJECT_DIR$/.idea/modules/demo2.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/surveyanalyze.main.iml" filepath="$PROJECT_DIR$/.idea/modules/surveyanalyze.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/surveyanswer.main.iml" filepath="$PROJECT_DIR$/.idea/modules/surveyanswer.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/surveydocument.main.iml" filepath="$PROJECT_DIR$/.idea/modules/surveydocument.main.iml" />
