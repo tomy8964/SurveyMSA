@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/demo1" />
     <file type="web" url="file://$PROJECT_DIR$/demo2" />
+    <file type="web" url="file://$PROJECT_DIR$/gateway" />
     <file type="web" url="file://$PROJECT_DIR$/surveyanalyze" />
     <file type="web" url="file://$PROJECT_DIR$/surveyanswer" />
     <file type="web" url="file://$PROJECT_DIR$/surveydocument" />

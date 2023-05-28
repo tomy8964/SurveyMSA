@@ -53,17 +53,6 @@ dependencies {
 	//WebClient
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
-	// OAuth
-	implementation group: 'com.auth0', name: 'java-jwt', version: '3.10.2'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:'
-
-	// QueryDsl
-	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
-	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
-	annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
-	annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
-
 	implementation 'com.mysql:mysql-connector-j'
 
 	// test
