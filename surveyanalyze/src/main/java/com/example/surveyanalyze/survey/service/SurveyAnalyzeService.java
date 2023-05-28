@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternUtils;
@@ -43,6 +44,11 @@ public class SurveyAnalyzeService {
     private final ChoiceAnalyzeRepository choiceAnalyzeRepository;
     private final QuestionAnalyzeRepository questionAnalyzeRepository;
     private final SurveyAnalyzeRepository surveyAnalyzeRepository;
+
+    @Value("${surveydocument.host}")
+    private static String surveydocumentHost;
+    @Value("${surveyanswer.host}")
+    private String surveyanswerHost;
 
     // 파이썬에 DocumentId 보내주고 분석결과 Entity에 매핑해서 저장
     public void analyze(String stringId) throws InvalidPythonException {
@@ -605,7 +611,7 @@ public class SurveyAnalyzeService {
                 .build();
 
         // Define the API URL
-        String apiUrl = "http://localhost:8080/api/getSurveyDocument/"+surveyDocumentId;
+        String apiUrl = "http://" + surveydocumentHost + "/api/getSurveyDocument/"+surveyDocumentId;
 
         // Make a GET request to the API and retrieve the response
         SurveyDocument get = webClient.get()
@@ -628,7 +634,7 @@ public class SurveyAnalyzeService {
         WebClient webClient = WebClient.create();
 
         // Define the API URL
-        String apiUrl = "http://localhost:8080/api/getChoice/"+ choiceId;
+        String apiUrl = "http://" + surveydocumentHost + "/api/getChoice/"+ choiceId;
 
         // Make a GET request to the API and retrieve the response
         Choice get = webClient.get()
@@ -651,7 +657,7 @@ public class SurveyAnalyzeService {
         WebClient webClient = WebClient.create();
 
         // Define the API URL
-        String apiUrl = "http://localhost:8080/api/getQuestion/"+ questionId;
+        String apiUrl = "http://" + surveydocumentHost + "/api/getQuestion/"+ questionId;
 
         // Make a GET request to the API and retrieve the response
         QuestionDocument get = webClient.get()
@@ -674,7 +680,7 @@ public class SurveyAnalyzeService {
         WebClient webClient = WebClient.create();
 
         // Define the API URL
-        String apiUrl = "http://localhost:8080/api/getQuestionByChoiceId/"+ choiceId;
+        String apiUrl = "http://" + surveydocumentHost + "/api/getQuestionByChoiceId/"+ choiceId;
 
         // Make a GET request to the API and retrieve the response
         QuestionDocument get = webClient.get()
@@ -697,7 +703,7 @@ public class SurveyAnalyzeService {
         WebClient webClient = WebClient.create();
 
         // Define the API URL
-        String apiUrl = "http://localhost:8080/api/getQuestionAnswerByCheckAnswerId/"+ id;
+        String apiUrl = "http://" + surveyanswerHost +"/api/getQuestionAnswerByCheckAnswerId/"+ id;
 
         // Make a GET request to the API and retrieve the response
         List<QuestionAnswer> questionAnswerList = webClient.get()
@@ -729,7 +735,7 @@ public class SurveyAnalyzeService {
         WebClient webClient = WebClient.create();
 
         // Define the API URL
-        String apiUrl = "http://localhost:8080/api/setWordCloud/"+ id;
+        String apiUrl = "http://" + surveydocumentHost + "/api/setWordCloud/"+ id;
 
         // Make a GET request to the API and retrieve the response
         String response = webClient.post()

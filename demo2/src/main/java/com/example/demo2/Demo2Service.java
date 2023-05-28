@@ -14,7 +14,7 @@ public class Demo2Service {
     private RestTemplate restTemplate = new RestTemplate();;
 
     public String getDemo1() {
-        String url = "http://demo1-service:9002/api/resource"; // Replace "/api/resource" with the actual endpoint of Service B
+        String url = "http://" + serviceDemo1Host + "/api/resource"; // Replace "/api/resource" with the actual endpoint of Service B
 
 //        String url = "http://localhost:8080/api/resource"; // Replace "/api/resource" with the actual endpoint of Service B
 

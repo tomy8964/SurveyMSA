@@ -25,6 +25,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,12 @@ public class SurveyDocumentService {
     private final QuestionDocumentRepository questionDocumentRepository;
     private final ChoiceRepository choiceRepository;
     private final WordCloudRepository wordCloudRepository;
+
+
+    @Value("${surveyanalyze.host}")
+    private String surveyanalyzeHost;
+    @Value("${surveyanswer.host}")
+    private String surveyanswerHost;
 
     @Transactional
     public void createSurvey(HttpServletRequest request, SurveyRequestDto surveyRequest) throws InvalidTokenException, UnknownHostException {
@@ -270,7 +277,7 @@ public class SurveyDocumentService {
         WebClient webClient = WebClient.create();
 
         // Define the API URL
-        String apiUrl = "http://localhost:8080/api/getQuestionAnswerByCheckAnswerId/"+ id;
+        String apiUrl = "http://" + surveyanswerHost + "/api/getQuestionAnswerByCheckAnswerId/"+ id;
 
         // Make a GET request to the API and retrieve the response
         List<QuestionAnswer> questionAnswerList = webClient.get()

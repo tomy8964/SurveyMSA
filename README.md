@@ -1,4 +1,8 @@
 # SurveyMSA
+# Ingress로 JWT 토큰 인증
+## 외부 요청 -> Ingress -> FrontEnd -> BackEnd (백엔드끼리의 통신은 REST API)
+# Spring Cloud Gateway로 JWT 토큰 인증
+## 외부 요청 -> Ingress -> FrontEnd -> Gateway -> BackEnd (백엔드끼리의 통신도 Gateway를 통해서)
  SWAVE project to MSA
  https://malwareanalysis.tistory.com/91
  https://blog.naver.com/alice_k106/221502890249
@@ -11,10 +15,15 @@
  3. 인그레스 컨트롤러를 설치해서 url에 따라 가르켜야 하는 서비스 지정
  4. 인그레스 ip로 접속 테스트
  5. 포드에서 포드끼리의 통신 테스트 (포드에서 서비스에게 가서 데이터 요청)
- 6. 5번을 위해 스프링 프로젝트에서는    
-`String url = "http://" + serviceBHost + "/api/resource";`
+ 6. 5번을 위해 스프링 프로젝트에서는
 ```java
-@Value("${serviceB.host}")
-private String serviceBHost;
+String url = "http://" + serviceDemo2.host + "/api/resource";
+
+@Value("${serviceDemo2.host}")
+private String serviceDemo2.host;
+
+
+application.properties 설정   
+serviceDemo2.host=demo2-service:9003
 ```   
  7. 이런식으로 application.properties에 serviceBHost를 저장하고 가져다 사용

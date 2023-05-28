@@ -8,6 +8,7 @@ import com.example.surveyanswer.survey.response.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -24,6 +25,11 @@ import java.util.Map;
 public class SurveyAnswerService {
     private final SurveyAnswerRepository surveyAnswerRepository;
     private final QuestionAnswerRepository questionAnswerRepository;
+
+    @Value("${surveyanalyze.host}")
+    private static String surveyanalyzeHost;
+    @Value("${surveydocument.host}")
+    private static String surveydocumentHost;
 
     // 설문 응답 참여
     public SurveyDetailDto getParticipantSurvey(Long id){
@@ -206,7 +212,7 @@ public class SurveyAnswerService {
         WebClient webClient = WebClient.create();
 
         // Define the API URL
-        String apiUrl = "http://localhost:8080/api/research/analyze/create";
+        String apiUrl = "http://"+ surveyanalyzeHost +"/api/research/analyze/create";
 
         // Make a GET request to the API and retrieve the response
         String post = webClient.post()
@@ -224,11 +230,11 @@ public class SurveyAnswerService {
     private static void giveChoiceIdToCount(Long choiceId) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
-        log.info("응답 저장 후 -> 분석 시작 REST API 전달");
+        log.info("응답 저장 후 count 할 choice id 전달");
         WebClient webClient = WebClient.create();
 
         // Define the API URL
-        String apiUrl = "http://localhost:8080/api/count/"+choiceId;
+        String apiUrl = "http://" + surveydocumentHost + "/api/count/" + choiceId;
 
         // Make a GET request to the API and retrieve the response
         String post = webClient.post()
@@ -246,11 +252,11 @@ public class SurveyAnswerService {
     private static void giveDocumentIdtoCountAnswer(Long surveyDocumentId) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
-        log.info("응답 저장 후 -> 분석 시작 REST API 전달");
+        log.info("응답 저장 후 -> 전체 응답 수 count 하기 위해 전달");
         WebClient webClient = WebClient.create();
 
         // Define the API URL
-        String apiUrl = "http://localhost:8080/api/countAnswer/"+surveyDocumentId;
+        String apiUrl = "http://" + surveydocumentHost + "/api/countAnswer/"+surveyDocumentId;
 
         // Make a GET request to the API and retrieve the response
         String post = webClient.post()
@@ -272,7 +278,7 @@ public class SurveyAnswerService {
         WebClient webClient = WebClient.create();
 
         // Define the API URL
-        String apiUrl = "http://localhost:8080/api/getSurveyDocument/"+surveyDocumentId;
+        String apiUrl = "http://" + surveydocumentHost + "/api/getSurveyDocument/" + surveyDocumentId;
 
         // Make a GET request to the API and retrieve the response
         SurveyDocument get = webClient.get()
