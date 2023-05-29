@@ -48,7 +48,7 @@ public class SurveyAnalyzeService {
     @Value("${surveydocument.host}")
     private static String surveydocumentHost="surveydocument-service:8081";
     @Value("${surveyanswer.host}")
-    private String surveyanswerHost="surveyanswer-service:8083";
+    private static String surveyanswerHost="surveyanswer-service:8083";
 
     // 파이썬에 DocumentId 보내주고 분석결과 Entity에 매핑해서 저장
     public void analyze(String stringId) throws InvalidPythonException {

@@ -53,7 +53,6 @@ public class SurveyAnswerService {
         surveyAnswerRepository.save(surveyAnswer);
 
         // Survey Response 를 Question Answer 에 저장하기
-        surveyAnswerRepository.findById(surveyAnswer.getId());
         for (QuestionResponseDto questionResponseDto : surveyResponse.getQuestionResponse()) {
             // Question Answer 에 저장
             // todo: 주관식0 / 찬부식1, 객관식2 구분 저장
