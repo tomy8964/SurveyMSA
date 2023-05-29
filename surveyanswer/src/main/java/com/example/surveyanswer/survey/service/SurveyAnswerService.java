@@ -27,9 +27,9 @@ public class SurveyAnswerService {
     private final QuestionAnswerRepository questionAnswerRepository;
 
     @Value("${surveyanalyze.host}")
-    private static String surveyanalyzeHost;
+    private static String surveyanalyzeHost = "localhost:8082";
     @Value("${surveydocument.host}")
-    private static String surveydocumentHost;
+    private static String surveydocumentHost = "localhost:8080";
 
     // 설문 응답 참여
     public SurveyDetailDto getParticipantSurvey(Long id){
@@ -125,7 +125,7 @@ public class SurveyAnswerService {
     }
 
     // SurveyDocument Response 보낼 SurveyDetailDto로 변환하는 메서드
-    private SurveyDetailDto getSurveyDetailDto(Long surveyDocumentId) {
+    public SurveyDetailDto getSurveyDetailDto(Long surveyDocumentId) {
 //        SurveyDocument surveyDocument = surveyDocumentRepository.findById(surveyDocumentId).get();
         SurveyDocument surveyDocument = getSurveyDocument(surveyDocumentId);
 
@@ -192,20 +192,7 @@ public class SurveyAnswerService {
         return surveyDetailDto;
     }
 
-    public static Map<String, Integer> countWords(String text) {
-        String[] words = text.split("\\s+");
-        Map<String, Integer> wordCount = new HashMap<>();
-
-        for (String word : words) {
-            if (!word.isEmpty()) {
-                wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
-            }
-        }
-
-        return wordCount;
-    }
-
-    private static void restAPItoAnalyzeController(Long surveyDocumentId) {
+    public void restAPItoAnalyzeController(Long surveyDocumentId) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
         log.info("응답 저장 후 -> 분석 시작 REST API 전달");
@@ -227,7 +214,7 @@ public class SurveyAnswerService {
         System.out.println("Request: " + post);
     }
 
-    private static void giveChoiceIdToCount(Long choiceId) {
+    public void giveChoiceIdToCount(Long choiceId) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
         log.info("응답 저장 후 count 할 choice id 전달");
@@ -249,14 +236,14 @@ public class SurveyAnswerService {
         System.out.println("Request: " + post);
     }
 
-    private static void giveDocumentIdtoCountAnswer(Long surveyDocumentId) {
+    public void giveDocumentIdtoCountAnswer(Long surveyDocumentId) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
         log.info("응답 저장 후 -> 전체 응답 수 count 하기 위해 전달");
         WebClient webClient = WebClient.create();
 
         // Define the API URL
-        String apiUrl = "http://" + surveydocumentHost + "/api/countAnswer/"+surveyDocumentId;
+        String apiUrl = "http://" + surveydocumentHost + "/api/countAnswer/" + surveyDocumentId;
 
         // Make a GET request to the API and retrieve the response
         String post = webClient.post()
@@ -271,7 +258,7 @@ public class SurveyAnswerService {
         System.out.println("Request: " + post);
     }
 
-    private static SurveyDocument getSurveyDocument(Long surveyDocumentId) {
+    public SurveyDocument getSurveyDocument(Long surveyDocumentId) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
         log.info("GET SurveyDocument");

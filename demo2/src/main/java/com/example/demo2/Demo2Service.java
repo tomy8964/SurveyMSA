@@ -13,13 +13,13 @@ public class Demo2Service {
 
     private RestTemplate restTemplate = new RestTemplate();;
 
-    public String getDemo1() {
+    public Survey getDemo1() {
         String url = "http://" + serviceDemo1Host + "/api/resource"; // Replace "/api/resource" with the actual endpoint of Service B
 
 //        String url = "http://localhost:8080/api/resource"; // Replace "/api/resource" with the actual endpoint of Service B
 
         // Make the request to Service B
-        String response = restTemplate.getForObject(url, String.class);
+        Survey response = restTemplate.getForObject(url, Survey.class);
 
         return response;
     }

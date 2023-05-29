@@ -49,11 +49,10 @@ public class SurveyDocumentService {
     private final ChoiceRepository choiceRepository;
     private final WordCloudRepository wordCloudRepository;
 
-
     @Value("${surveyanalyze.host}")
-    private String surveyanalyzeHost;
+    private String surveyanalyzeHost="localhost:8082";
     @Value("${surveyanswer.host}")
-    private String surveyanswerHost;
+    private String surveyanswerHost="localhost:8083";
 
     @Transactional
     public void createSurvey(HttpServletRequest request, SurveyRequestDto surveyRequest) throws InvalidTokenException, UnknownHostException {
@@ -203,7 +202,7 @@ public class SurveyDocumentService {
     }
 
     // SurveyDocument Response 보낼 SurveyDetailDto로 변환하는 메서드
-    private SurveyDetailDto getSurveyDetailDto(Long surveyDocumentId) {
+    public SurveyDetailDto getSurveyDetailDto(Long surveyDocumentId) {
         SurveyDocument surveyDocument = surveyDocumentRepository.findById(surveyDocumentId).get();
         SurveyDetailDto surveyDetailDto = new SurveyDetailDto();
 
@@ -270,7 +269,7 @@ public class SurveyDocumentService {
         return surveyDetailDto;
     }
 
-    private List<QuestionAnswer> getQuestionAnswersByCheckAnswerId(Long id) {
+    public List<QuestionAnswer> getQuestionAnswersByCheckAnswerId(Long id) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
         log.info("GET questionAnswer List by checkAnswerId");

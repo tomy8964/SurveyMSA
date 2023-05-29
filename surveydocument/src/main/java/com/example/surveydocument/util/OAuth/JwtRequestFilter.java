@@ -21,16 +21,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-@RequiredArgsConstructor
-@Component
 @Slf4j
+@Component
+@RequiredArgsConstructor
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     UserRepository userRepository;
 
     // 인증에서 제외할 url
-    private static final String Exclude_url = "/api/response/create/**,/api/survey/load/**";
+    private static final String Exclude_url = "/**";
     private static final List<String> EXCLUDE_URL =
             Collections.unmodifiableList(
                     Arrays.asList(

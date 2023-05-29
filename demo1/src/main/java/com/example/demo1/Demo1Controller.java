@@ -9,9 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class Demo1Controller {
 
     @GetMapping("/resource")
-    public String getResource() {
+    public Survey getResource() {
         // Perform some logic to retrieve the desired resource
-        String resource = "This is the resource from Demo1";
+        Survey resource = new Survey().builder()
+                .id(1L)
+                .acceptResponse(true)
+                .title("Survey Title")
+                .url("http://www.demo1.com")
+                .countAnswer(0)
+                .description("Survey Description")
+                .build();
 
         return resource;
     }

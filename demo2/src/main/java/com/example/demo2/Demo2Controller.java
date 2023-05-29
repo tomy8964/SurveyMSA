@@ -13,7 +13,7 @@ public class Demo2Controller {
     private final Demo2Service demo2Service;
 
     @GetMapping(value = "/api")
-    public String getResource() {
+    public Survey getResource() {
         return demo2Service.getDemo1();
     }
 }

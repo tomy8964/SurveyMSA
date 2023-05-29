@@ -46,9 +46,9 @@ public class SurveyAnalyzeService {
     private final SurveyAnalyzeRepository surveyAnalyzeRepository;
 
     @Value("${surveydocument.host}")
-    private static String surveydocumentHost;
+    private static String surveydocumentHost="localhost:8080";
     @Value("${surveyanswer.host}")
-    private String surveyanswerHost;
+    private String surveyanswerHost="localhost:8083";
 
     // 파이썬에 DocumentId 보내주고 분석결과 Entity에 매핑해서 저장
     public void analyze(String stringId) throws InvalidPythonException {
@@ -498,7 +498,7 @@ public class SurveyAnalyzeService {
         return surveyDetailDto;
     }
 
-    private SurveyAnalyzeDto getSurveyDetailAnalyzeDto(Long surveyId) {
+    public SurveyAnalyzeDto getSurveyDetailAnalyzeDto(Long surveyId) {
         SurveyAnalyze surveyAnalyze = surveyAnalyzeRepository.findById(surveyId).get();
         SurveyAnalyzeDto surveyAnalyzeDto = new SurveyAnalyzeDto();
 
@@ -562,7 +562,7 @@ public class SurveyAnalyzeService {
         return surveyAnalyzeDto;
     }
 
-    private static String removeStopwords(List<String> inputList, List<String> stopwords) {
+    public static String removeStopwords(List<String> inputList, List<String> stopwords) {
         List<String> filteredList = new ArrayList<>();
 
         for (String inputString : inputList) {
@@ -602,7 +602,7 @@ public class SurveyAnalyzeService {
         return wordCount;
     }
 
-    private static SurveyDocument getSurveyDocument(Long surveyDocumentId) {
+    public static SurveyDocument getSurveyDocument(Long surveyDocumentId) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
         log.info("GET SurveyDocument");
@@ -627,7 +627,7 @@ public class SurveyAnalyzeService {
         return get;
     }
 
-    private static Choice getChoice(Long choiceId) {
+    public Choice getChoice(Long choiceId) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
         log.info("GET Choice");
@@ -650,7 +650,7 @@ public class SurveyAnalyzeService {
         return get;
     }
 
-    private static QuestionDocument getQuestionDocument(Long questionId) {
+    public QuestionDocument getQuestionDocument(Long questionId) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
         log.info("GET question");
@@ -673,7 +673,7 @@ public class SurveyAnalyzeService {
         return get;
     }
 
-    private QuestionDocument getQuestionByChoiceId(Long choiceId) {
+    public QuestionDocument getQuestionByChoiceId(Long choiceId) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
         log.info("GET question by choiceId");
@@ -696,7 +696,7 @@ public class SurveyAnalyzeService {
         return get;
     }
 
-    private List<QuestionAnswer> getQuestionAnswerByCheckAnswerId(Long id) {
+    public List<QuestionAnswer> getQuestionAnswerByCheckAnswerId(Long id) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
         log.info("GET questionAnswer List by checkAnswerId");
@@ -728,7 +728,7 @@ public class SurveyAnalyzeService {
         return questionAnswerList;
     }
 
-    private void postToQuestionToSetWordCloud(Long id, List<WordCloudDto> wordCloudList) {
+    public void postToQuestionToSetWordCloud(Long id, List<WordCloudDto> wordCloudList) {
         //REST API로 분석 시작 컨트롤러로 전달
         // Create a WebClient instance
         log.info("GET question by choiceId");

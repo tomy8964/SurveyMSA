@@ -1,6 +1,8 @@
 # SurveyMSA
 # Ingress로 JWT 토큰 인증
 ## 외부 요청 -> Ingress -> FrontEnd -> BackEnd (백엔드끼리의 통신은 REST API)
+#### ![img.png](img.png)
+#### demo2 포드에 들어가서 curl로 demo1-service:9002/api/resource 요청 받음
 # Spring Cloud Gateway로 JWT 토큰 인증
 ## 외부 요청 -> Ingress -> FrontEnd -> Gateway -> BackEnd (백엔드끼리의 통신도 Gateway를 통해서)
  SWAVE project to MSA
