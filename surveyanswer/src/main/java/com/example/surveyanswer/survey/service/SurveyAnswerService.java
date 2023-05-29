@@ -27,9 +27,9 @@ public class SurveyAnswerService {
     private final QuestionAnswerRepository questionAnswerRepository;
 
     @Value("${surveyanalyze.host}")
-    private static String surveyanalyzeHost = "localhost:8082";
+    private static String surveyanalyzeHost = "surveyanalyze-service:8082";
     @Value("${surveydocument.host}")
-    private static String surveydocumentHost = "localhost:8080";
+    private static String surveydocumentHost = "surveydocument-service:8081";
 
     // 설문 응답 참여
     public SurveyDetailDto getParticipantSurvey(Long id){

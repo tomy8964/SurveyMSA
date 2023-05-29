@@ -50,9 +50,9 @@ public class SurveyDocumentService {
     private final WordCloudRepository wordCloudRepository;
 
     @Value("${surveyanalyze.host}")
-    private String surveyanalyzeHost="localhost:8082";
+    private String surveyanalyzeHost="surveyanalyze-service:8082";
     @Value("${surveyanswer.host}")
-    private String surveyanswerHost="localhost:8083";
+    private String surveyanswerHost="surveyanswer-service:8083";
 
     @Transactional
     public void createSurvey(HttpServletRequest request, SurveyRequestDto surveyRequest) throws InvalidTokenException, UnknownHostException {
